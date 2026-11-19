@@ -80,9 +80,6 @@ class Temperatures:
 
     def convert_to(self, target_unit: str) -> Temperatures:
         """Converts given value to a given unit"""
-        if target_unit.strip().upper()[0] not in ["C", "F", "K"]:  # Maybe not include full words?
-            raise ValueError('Unit must be celsius (C), Fahrenheit (F) or Kelvin (K)')
-
         if target_unit.strip().upper()[0] == "C":
             self._value = self.to_celsius()
 
