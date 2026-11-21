@@ -7,7 +7,7 @@ class Temperatures:
     """Class that supports convertion and comparisons between temperatures
     in Celsius (C), Fahrenheit (F) and Kelvin (K)"""
 
-    def __init__(self, value: int | float, unit: str) -> None:
+    def __init__(self, value: int | float = 25, unit: str = 'C') -> None:
         """
         Initialise the temperature
         Args:
@@ -119,7 +119,7 @@ class Temperatures:
             return self.to_celsius() < other.to_celsius()
 
 
-temp = Temperatures(value=0, unit='c')
+temp = Temperatures(value=25, unit='C')
 print(temp.value, temp.unit)
 print(temp.to_celsius(), temp.unit)
 print(temp.to_fahrenheit(), temp.unit)

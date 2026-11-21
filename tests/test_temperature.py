@@ -4,21 +4,23 @@ sys.path.insert(0, '/Users/norahattrem/Desktop/Programmering/Visual_Studio_Code/
 import pytest
 from temperature import Temperatures
 
-use = Temperatures(value=25, unit='celsius')
+default = Temperatures()
 
-
-def test_default_unit() -> None:
-    """Default unit??????????"""
-    pass
+@pytest.mark.parametrize("default, expected",
+                         [[default.value, 25],
+                         [default.unit, 'C']
+                         ])
+def test_default_unit(default: int | str, expected: int | str) -> None:
+    assert default == expected
 
 
 def test_case_insensitive_units() -> None:
-    assert use.unit == 'C'
+    assert default.unit == 'C'
 
 
 def test_read_only_behavior() -> None:
     with pytest.raises(AttributeError):
-        use.value = 50
+        default.value = 50
 
 
 def test_invalid_unit_string() -> None:
@@ -70,12 +72,66 @@ def test_conversion_kelvin(temp: Temperatures, kelvin: int | float) -> None:
 
 
 def test_round_trip_conversions() -> None:
-    assert use.value == use.convert_to('F').convert_to('K').convert_to('C').value
+    assert default.value == default.convert_to('F').convert_to('K').convert_to('C').value
 
 
-def test_cross_unit_comparisons() -> None:
-    pass
+@pytest.mark.parametrize("temp1, temp2",
+                         [[Temperatures(value=0, unit='C'), Temperatures(value=0, unit='C')],
+                          [Temperatures(value=298.15, unit='K'), Temperatures(value=25, unit='C')],
+                          [Temperatures(value=89.6, unit='F'), Temperatures(value=305.15, unit='K')],
+                          ])
+def test_equality(temp1: Temperatures, temp2: Temperatures) -> None:
+    assert temp1 == temp2
 
 
-def test_formatting() -> None:
-    pass
+@pytest.mark.parametrize("temp1, temp2",
+                         [[Temperatures(value=15, unit='K'), Temperatures(value=0, unit='K')],
+                          [Temperatures(value=50, unit='F'), Temperatures(value=25, unit='C')],
+                          [Temperatures(value=100, unit='C'), Temperatures(value=60, unit='K')],
+                          ])
+def test_not_equal(temp1: Temperatures, temp2: Temperatures) -> None:
+    assert temp1 != temp2
+
+
+@pytest.mark.parametrize("temp1, temp2",
+                         [[Temperatures(value=10, unit='F'), Temperatures(value=30, unit='F')],
+                          [Temperatures(value=0, unit='C'), Temperatures(value=60, unit='F')],
+                          [Temperatures(value=40, unit='K'), Temperatures(value=0, unit='C')],
+                          ])
+def test_less_than(temp1: Temperatures, temp2: Temperatures) -> None:
+    assert temp1 < temp2
+
+
+@pytest.mark.parametrize("temp1, temp2",
+                         [[Temperatures(value=55, unit='K'), Temperatures(value=55, unit='K')],
+                          [Temperatures(value=0, unit='F'), Temperatures(value=20, unit='C')],
+                          [Temperatures(value=-30, unit='F'), Temperatures(value=238.71, unit='K')],
+                          ])
+def test_less_or_equal(temp1: Temperatures, temp2: Temperatures) -> None:
+    assert temp1 <= temp2
+
+
+@pytest.mark.parametrize("temp1, temp2",
+                         [[Temperatures(value=16, unit='F'), Temperatures(value=15, unit='F')],
+                          [Temperatures(value=-40, unit='F'), Temperatures(value=150, unit='K')],
+                          [Temperatures(value=5, unit='C'), Temperatures(value=100, unit='K')],
+                          ])
+def test_greater_than(temp1: Temperatures, temp2: Temperatures) -> None:
+    assert temp1 > temp2
+
+
+@pytest.mark.parametrize("temp1, temp2",
+                         [[Temperatures(value=10, unit='C'), Temperatures(value=10, unit='C')],
+                          [Temperatures(value=40, unit='F'), Temperatures(value=20, unit='K')],
+                          [Temperatures(value=25, unit='C'), Temperatures(value=77, unit='F')],
+                          ])
+def test_greater_or_equal(temp1: Temperatures, temp2: Temperatures) -> None:
+    assert temp1 >= temp2
+
+
+@pytest.mark.parametrize("formatting, expected",
+                         [[default.__repr__(), 'Temperature(25, C)'],
+                          [default.__str__(), '25.00 °C']
+                          ])
+def test_formatting(formatting: str, expected: str) -> None:
+    assert formatting == expected
