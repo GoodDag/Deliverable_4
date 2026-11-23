@@ -117,25 +117,3 @@ class Temperatures:
             return self._value < other._value
         else:
             return self.to_celsius() < other.to_celsius()
-
-
-temp = Temperatures(value=25, unit='C')
-print(temp.value, temp.unit)
-print(temp.to_celsius(), temp.unit)
-print(temp.to_fahrenheit(), temp.unit)
-print(temp.to_kelvin(), temp.unit)
-print()
-to_c = temp.convert_to(target_unit='c')
-print(to_c.value, to_c.unit)
-print(temp.__repr__())
-print(temp)
-print()
-
-t1 = Temperatures(value=32, unit='f')
-t2 = Temperatures(value=0, unit='c')
-print(f't1 == t2: {t1 == t2}')
-print(f't1 != t2: {t1 != t2}')
-print(f't1 < t2: {t1 < t2}')
-print(f't1 <= t2: {t1 <= t2}')
-print(f't1 > t2: {t1 > t2}')
-print(f't1 >= t2: {t1 >= t2}')
