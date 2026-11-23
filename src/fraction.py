@@ -53,17 +53,3 @@ class Fractions:
         div_numerator = self.numerator * other.denominator
         div_denominator = self.denominator * other.numerator
         return Fractions(div_numerator, div_denominator)
-
-    def __str__(self) -> str:
-        """String representation of Temperatures object"""
-        return f"{self.numerator:.2f} / {self.denominator}"
-
-    def __repr__(self) -> str:
-        """Representation of Temperatures object"""
-        return f"Fraction({self.numerator} / {self.denominator})"
-
-
-test1 = Fractions(2, 3)
-test2 = Fractions(1, 2)
-
-print(test1 + test2)

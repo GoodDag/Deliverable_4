@@ -5,14 +5,14 @@ import pytest
 from fraction import Fractions
 
 
-def test_init():
+def test_init() -> None:
     fraction = Fractions(2, 3)
 
     assert fraction.numerator == 2
     assert fraction.denominator == 3
 
 
-def test_init_invalid_denominator():
+def test_init_invalid_denominator() -> None:
     with pytest.raises(ValueError):
         Fractions(2, 0)
 
@@ -29,72 +29,73 @@ def test_init_invalid_type(numerator: int | float, denominator: int | float) -> 
         Fractions(numerator, denominator)
 
 
-def test_equal():
-    fracton1 = Fractions(1, 2)
-    fraction2 = Fractions(2, 4)
-
-    assert fracton1 == fraction2
-
-
-def test_not_equal():
-    fracton1 = Fractions(1, 2)
-    fraction2 = Fractions(2, 3)
-
-    assert fracton1 != fraction2
+@pytest.mark.parametrize("fraction1, fraction2",
+                        [[Fractions(1, 2), Fractions(2, 4)]
+                        ])
+def test_equal(fraction1: Fractions, fraction2: Fractions) -> None:
+    assert fraction1 == fraction2
 
 
-def test_less_than():
-    fracton1 = Fractions(1, 2)
-    fraction2 = Fractions(2, 3)
-
-    assert fracton1 < fraction2
-
-
-def test_less_than_or_equal():
-    fracton1 = Fractions(1, 2)
-    fraction2 = Fractions(2, 3)
-
-    assert fracton1 <= fraction2
+@pytest.mark.parametrize("fraction1, fraction2",
+                        [[Fractions(1, 2), Fractions(2, 3)]
+                        ])
+def test_not_equal(fraction1: Fractions, fraction2: Fractions) -> None:
+    assert fraction1 != fraction2
 
 
-def test_greater_than():
-    fracton1 = Fractions(2, 3)
-    fraction2 = Fractions(1, 2)
+@pytest.mark.parametrize("fraction1, fraction2",
+                        [[Fractions(1, 2), Fractions(3, 4)]
+                        ])
+def test_less_than(fraction1: Fractions, fraction2: Fractions) -> None:
+    assert fraction1 < fraction2
 
-    assert fracton1 > fraction2
+
+@pytest.mark.parametrize("fraction1, fraction2",
+                        [[Fractions(3, 6), Fractions(2, 4)],
+                         [Fractions(2, 5), Fractions(2, 3)]
+                        ])
+def test_less_than_or_equal(fraction1: Fractions, fraction2: Fractions) -> None:
+    assert fraction1 <= fraction2
 
 
-def test_greater_than_or_equal():
-    fracton1 = Fractions(2, 3)
-    fraction2 = Fractions(1, 2)
+@pytest.mark.parametrize("fraction1, fraction2",
+                        [[Fractions(6, 5), Fractions(3, 7)]
+                        ])
+def test_greater_than(fraction1: Fractions, fraction2: Fractions) -> None:
+    assert fraction1 > fraction2
 
-    assert fracton1 >= fraction2
+
+@pytest.mark.parametrize("fraction1, fraction2",
+                        [[Fractions(3, 4), Fractions(6, 8)],
+                         [Fractions(2, 2), Fractions(1, 3)]
+                        ])
+def test_greater_than_or_equal(fraction1: Fractions, fraction2: Fractions) -> None:
+    assert fraction1 >= fraction2
 
 
 @pytest.mark.parametrize("adding, expected",
-                         [[Fractions(2, 3) + Fractions(1, 2), Fractions(7, 6)]
-                           ])
-def test_add(adding, expected):
+                        [[Fractions(2, 3) + Fractions(1, 2), Fractions(7, 6)]
+                        ])
+def test_add(adding: Fractions, expected: Fractions) -> None:
     assert adding == expected
 
 
-def test_subtract():
-    fracton1 = Fractions(2, 3)
-    fraction2 = Fractions(1, 2)
-
-    assert fracton1 - fraction2
-
-
-def test_multiply():
-    fracton1 = Fractions(2, 3)
-    fraction2 = Fractions(1, 2)
-
-    assert fracton1 * fraction2
+@pytest.mark.parametrize("subtracting, expected",
+                        [[Fractions(2, 3) - Fractions(1, 2), Fractions(1, 6)]
+                        ])
+def test_subtract(subtracting: Fractions, expected: Fractions) -> None:
+    assert subtracting == expected
 
 
-def test_divide():
-    fracton1 = Fractions(2, 3)
-    fraction2 = Fractions(1, 2)
+@pytest.mark.parametrize("multiplying, expected",
+                        [[Fractions(2, 3) * Fractions(1, 2), Fractions(2, 6)]
+                        ])
+def test_multiply(multiplying: Fractions, expected: Fractions) -> None:
+    assert multiplying == expected
 
-    assert fracton1 / fraction2
 
+@pytest.mark.parametrize("dividing, expected",
+                        [[Fractions(1, 2) / Fractions(3, 4), Fractions(4, 6)]
+                        ])
+def test_divide(dividing: Fractions, expected: Fractions) -> None:
+    assert dividing == expected
