@@ -1,4 +1,5 @@
 class Fractions:
+    """Class for comparing and executing different mathematical methods on fractions"""
     def __init__(self, numerator: int, denominator: int):
         """
         Initialise the fractions
@@ -49,7 +50,7 @@ class Fractions:
         return Fractions(add_numerator, add_denominator)
 
     def __sub__(self, other: Fractions) -> Fractions:
-        """Substracting two fractions"""
+        """Subtraction two fractions"""
         sub_numerator = self.numerator * other.denominator - other.numerator * self.denominator
         sub_denominator = self.denominator * other.denominator
         return Fractions(sub_numerator, sub_denominator)
