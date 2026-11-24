@@ -1,0 +1,14 @@
+* 7c571dc - Mathilde Mæland Andersen, 75 seconds ago : small changes
+* 63bd7d9 - Nora Hattrem, 43 minutes ago : Finishing touches
+* 1ebe35b - Mathilde Mæland Andersen, 17 hours ago : added doc-strings to fraction class
+* c716745 - Nora Hattrem, 18 hours ago : updated notebook
+* ac47132 - Nora Hattrem, 18 hours ago : Small fixes
+* 3c4abae - Nora Hattrem, 18 hours ago : Added fraction tests
+* aed61f6 - Nora Hattrem, 24 hours ago : Tried out som fraction tests
+* ef105b7 - Nora Hattrem, 3 days ago : Added type hints
+* 48e7513 - Nora Hattrem, 3 days ago : Added missing tests
+* c2844a4 - Nora Hattrem, 5 days ago : Added some tests
+* b341bbc - Nora Hattrem, 5 days ago : Added code for task 1
+* 41ff6f6 - Mathilde Mæland Andersen, 5 days ago : made fractions class
+* b26cb94 - Nora Hattrem, 6 days ago : Created general file structure
+* c532d74 - GoodDag, 8 days ago : Initial commit
