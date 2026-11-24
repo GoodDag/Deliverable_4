@@ -17,18 +17,18 @@ class Temperatures:
         self._value = value
         self._unit = unit.strip().upper()[0]
 
-        if self._unit not in ["C", "F", "K"]:  # Maybe not include full words?
+        if self._unit not in ["C", "F", "K"]:
             raise ValueError('Unit must be celsius (C), Fahrenheit (F) or Kelvin (K)')
 
         if self._value < 0 and self._unit == "K" or self._value < -273.15 and self._unit == "C" or self._value < -459.67 and self._unit == "F":
-            raise ValueError('Value cannot be below absolute zero')  # Somehow make shorter?
+            raise ValueError('Value cannot be below absolute zero')
 
-    @property  # read only attribute not property?
+    @property
     def value(self) -> int | float:
         """Public read-only property to inspect value"""
         return self._value
 
-    @property  # read only attribute not property?
+    @property
     def unit(self) -> str:
         """Public read-only property to inspect unit"""
         return self._unit
@@ -106,7 +106,7 @@ class Temperatures:
             return NotImplemented
         if self._unit == other._unit:
             return self._value == other._value
-        else:  # Maybe remove upper, cause doesnt matter if same, can convert anyway?
+        else:
             return m.isclose(self.to_celsius(), other.to_celsius(), rel_tol=tol, abs_tol=tol)
 
     def __lt__(self, other: Temperatures) -> bool:

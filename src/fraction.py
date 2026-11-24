@@ -1,6 +1,3 @@
-import math as m
-
-
 class Fractions:
     def __init__(self, numerator: int, denominator: int):
         """
@@ -68,4 +65,3 @@ class Fractions:
         div_numerator = self.numerator * other.denominator
         div_denominator = self.denominator * other.numerator
         return Fractions(div_numerator, div_denominator)
-    
